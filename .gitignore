@@ -1,0 +1,17 @@
+# Virtual Environment
+/venv/
+
+# PyCharm Config
+.idea/
+
+# Python Caches
+*__pycache__/
+
+# Local Data Folder
+/local_input/
+
+# Local Data Folder
+/local_output/
+
+# Docker Cleanup file
+/docker_cleanup.sh
