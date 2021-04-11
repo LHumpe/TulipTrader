@@ -15,3 +15,6 @@
 
 # Docker Cleanup file
 /docker_cleanup.sh
+
+# Package Installation Derivatives
+/TulipTrader.egg-info/

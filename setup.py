@@ -11,7 +11,10 @@ setup(
                       'stockstats==0.3.2',
                       'flask==1.1.2',
                       'requests==2.25.1',
-                      'click==7.1.2'],
+                      'numpy==1.20.2',
+                      'click==7.1.2',
+                      'stable-baselines3==1.0',
+                      'gym==0.18.0'],
     entry_points={
         'console_scripts': ['crypto=tuliptrader.crypto.cli:cli']
     }
