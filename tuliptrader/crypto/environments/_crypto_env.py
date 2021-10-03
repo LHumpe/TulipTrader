@@ -88,13 +88,15 @@ class CryptoTradingEnv(gym.Env):
         # TODO: add penalty for unrealized profit
         action_type, amount = action[0], action[1] / 10
         real_cost_per_coin = self.step_data.close * (1 + self.commission)
+        real_value_per_coin = self.step_data.close * (1 - self.commission)
+        print(self.step_data.date, action)
 
         if action_type == 0:  # buy
             self.history.Total.iloc[-1] = -(self.history.Balance_Start.iloc[-1] * amount)
             self.history.Actions.iloc[-1] = abs(self.history.Total.iloc[-1]) / real_cost_per_coin
         elif action_type == 1:  # sell
             self.history.Actions.iloc[-1] = -(self.history.Coins_Start.iloc[-1] * amount)
-            self.history.Total.iloc[-1] = abs(self.history.Actions.iloc[-1]) * real_cost_per_coin
+            self.history.Total.iloc[-1] = abs(self.history.Actions.iloc[-1]) * real_value_per_coin
         else:  # hold
             self.history.Actions.iloc[-1] = 0
             self.history.Total.iloc[-1] = 0
@@ -111,7 +113,7 @@ class CryptoTradingEnv(gym.Env):
 
         self.current_step += 1
 
-        self.terminal = self.history.NW_End.iloc[-1] <= 0 or self.current_step >= len(self.full_data.index.unique()) - 1
+        self.terminal = self.history.NW_End.iloc[-1] <= 0 or self.current_step >= len(self.full_data.index.unique()) - 2
 
         if not self.terminal:
             self.step_data = self.full_data.loc[self.current_step, :]
